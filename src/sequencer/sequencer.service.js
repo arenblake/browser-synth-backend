@@ -16,11 +16,21 @@ function generateRandomPreset() {
 }
 
 function list() {
-  return "GET all sequencer presets";
+  return knex("sequencer_presets").select();
+}
+
+function create(preset) {
+  // console.log(preset);
+
+  return knex("sequencer_presets")
+    .insert(preset)
+    .returning("*")
+    .then((createdRecords) => createdRecords[0]);
 }
 
 module.exports = {
   list,
+  create,
   generateRandomPreset,
 };
 
