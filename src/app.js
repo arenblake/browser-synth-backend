@@ -2,6 +2,10 @@ if (process.env.USER) require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+
+const sequencerRouter = require("./sequencer/sequencer.router");
+const synthRouter = require("./synth/synth.router");
+
 const app = express();
 
 app.use(cors());
@@ -12,9 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-const sequencerRouter = require("./sequencer/sequencer.router");
-
 app.use("/sequencer", sequencerRouter);
+app.use("/synth", synthRouter);
 
 // Not found handler
 app.use((req, res, next) => {
