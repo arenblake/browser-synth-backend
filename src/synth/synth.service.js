@@ -1,11 +1,12 @@
 const knex = require("../db/connection");
 
 function list() {
-  return knex("sequencer_presets").select();
+  console.log("list all synth presets");
+  return knex("synth_presets").select();
 }
 
 function create(preset) {
-  return knex("sequencer_presets")
+  return knex("synth_presets")
     .insert(preset)
     .returning("*")
     .then((createdRecords) => createdRecords[0]);
@@ -14,5 +15,4 @@ function create(preset) {
 module.exports = {
   list,
   create,
-  generateRandomPreset,
 };

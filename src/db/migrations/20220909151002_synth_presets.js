@@ -7,7 +7,7 @@ exports.up = function (knex) {
     t.increments("id").unsigned().primary();
     t.string("name").unique().notNullable();
     // stringify the array of objects into a text field
-    t.string("settings").notNullable();
+    t.string("settings", 8000).notNullable();
     t.timestamps(true, true);
   });
 };
